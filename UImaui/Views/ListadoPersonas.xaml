@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UImaui.Views.ListadoPersonas"
+             xmlns:miViewModel="clr-namespace:UImaui.ViewModels"
+             Title="ListadoPersonas">
+
+    <ContentPage.BindingContext>
+        <miViewModel:ListadoPersonasVM></miViewModel:ListadoPersonasVM>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout Orientation="Vertical">
+
+        
+        <Label Text="{Binding PersonaSeleccionada.Nombre}">
+
+        </Label>
+
+        <ScrollView>
+            <ListView 
+        Grid.Row="1"
+        ItemsSource="{Binding Personas}" 
+        SelectedItem="{Binding PersonaSeleccionada}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="#FAFAFA">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Image Source="{Binding Foto}" 
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Aspect="AspectFill" />
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Nombre}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="18" 
+                                       TextColor="#333" />
+                                        <Label Text="{Binding Apellido}" 
+                                       FontSize="14" 
+                                       TextColor="#666" />
+                                        <Label Text="{Binding Direccion}" 
+                                       FontSize="14" 
+                                       TextColor="#999" />
+                                        <Label Text="{Binding FechaNac, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                       FontSize="14" 
+                                       TextColor="#999" />
+                                        <Label Text="{Binding IdDepartamento}" 
+                                       FontSize="14" 
+                                       TextColor="#666" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+
+
+
+        </ScrollView>
+
+
+    </StackLayout>
+
+        
+</ContentPage>
