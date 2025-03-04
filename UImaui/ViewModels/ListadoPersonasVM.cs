@@ -47,7 +47,9 @@ namespace UImaui.ViewModels
 
 
 
-        /// COMMANDS ???
+        /// COMMANDS
+
+
         public ICommand AnadirCommand { get; private set; }
         public ICommand EditarCommand { get; private set; }
         public ICommand DetallesCommand { get; private set; }

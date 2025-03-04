@@ -10,60 +10,85 @@
     </ContentPage.BindingContext>
 
 
-    <StackLayout Orientation="Vertical">
-
-        
-        <Label Text="{Binding PersonaSeleccionada.Nombre}">
-
-        </Label>
-
-        <ScrollView>
-            <ListView 
-        Grid.Row="1"
-        ItemsSource="{Binding Personas}" 
-        SelectedItem="{Binding PersonaSeleccionada}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame BackgroundColor="#FAFAFA">
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image Source="{Binding Foto}" 
-                                   HeightRequest="60" 
-                                   WidthRequest="60" 
-                                   Aspect="AspectFill" />
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding Nombre}" 
-                                       FontAttributes="Bold" 
-                                       FontSize="18" 
-                                       TextColor="#333" />
-                                        <Label Text="{Binding Apellido}" 
-                                       FontSize="14" 
-                                       TextColor="#666" />
-                                        <Label Text="{Binding Direccion}" 
-                                       FontSize="14" 
-                                       TextColor="#999" />
-                                        <Label Text="{Binding FechaNac, StringFormat='{}{0:dd/MM/yyyy}'}" 
-                                       FontSize="14" 
-                                       TextColor="#999" />
-                                        <Label Text="{Binding IdDepartamento}" 
-                                       FontSize="14" 
-                                       TextColor="#666" />
-                                    </VerticalStackLayout>
-                                </HorizontalStackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+    <ScrollView>
 
 
+        <VerticalStackLayout>
+
+            <Grid RowDefinitions="Auto,*">
+
+                <VerticalStackLayout>
 
 
+                    <!-- Mandan a las pantallas correspondientes, las cuales tendran la persona seleccionada -->
 
-        </ScrollView>
+                    <Button 
+                    Text="Detalles"
+                    IsEnabled="{Binding EsSeleccionada}"
+                    Command="{Binding DetallesCommand}" 
+                    />
+
+                    <Button 
+                    Text="Editar"
+                    IsEnabled="{Binding EsSeleccionada}"
+                    Command="{Binding EditarCommand}" 
+                    />
+
+                    <Button 
+                    Text="Borrar"
+                    IsEnabled="{Binding EsSeleccionada}"
+                    Command="{Binding BorrarCommand}"
+                    />
 
 
-    </StackLayout>
+                    <Label Text="{Binding PersonaSeleccionada.Nombre}"/>
 
-        
+                </VerticalStackLayout>
+
+
+                <!-- ListView -->
+                <ListView 
+                Grid.Row="1"
+                ItemsSource="{Binding Personas}" 
+                SelectedItem="{Binding PersonaSeleccionada}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BackgroundColor="#FAFAFA">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Image Source="{Binding Foto}" 
+                                           HeightRequest="60" 
+                                           WidthRequest="60" 
+                                           Aspect="AspectFill" />
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Nombre}" 
+                                               FontAttributes="Bold" 
+                                               FontSize="18" 
+                                               TextColor="#333" />
+                                            <Label Text="{Binding Apellido}" 
+                                               FontSize="14" 
+                                               TextColor="#666" />
+                                            <Label Text="{Binding Direccion}" 
+                                               FontSize="14" 
+                                               TextColor="#999" />
+                                            <Label Text="{Binding FechaNac, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                               FontSize="14" 
+                                               TextColor="#999" />
+                                            <Label Text="{Binding IdDepartamento}" 
+                                               FontSize="14" 
+                                               TextColor="#666" />
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+
 </ContentPage>

@@ -15,8 +15,21 @@
             ContentTemplate="{DataTemplate local:Listado}"
             Route="MainPage" />
 
+
+
+    <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate local:ListadoPersonas}"
+            Route="MainPage.personas" />
     
-    
+    <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate local:ListadoPersonas}"
+            Route="MainPage.departamentos" />
+
+
+
+
     <!--
     
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
