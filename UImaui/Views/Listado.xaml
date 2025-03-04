@@ -15,8 +15,7 @@
             Text="Personas"
             Command="{Binding IrAPersonasCommand}"
         />
-
-
+        
         <Button
             Text="Departamentos"
             Command="{Binding IrADeptsCommand}"
