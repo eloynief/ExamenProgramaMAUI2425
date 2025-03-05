@@ -20,16 +20,18 @@ namespace APImaui
             Uri uri = new Uri($"{cadenaUrl}personas");
 
             List<Persona> listadoPersonas = new List<Persona>();
+            HttpResponseMessage miCodigoRespuesta;
+            string textoJsonRespuesta;
+            HttpClient mihttpClient = new HttpClient();
 
-            using (HttpClient mihttpClient = new HttpClient())
-            {
                 try
                 {
-                    HttpResponseMessage miCodigoRespuesta = await mihttpClient.GetAsync(uri);
+                    miCodigoRespuesta = await mihttpClient.GetAsync(uri);
 
                     if (miCodigoRespuesta.IsSuccessStatusCode)
                     {
-                        string textoJsonRespuesta = await miCodigoRespuesta.Content.ReadAsStringAsync();
+                        textoJsonRespuesta = await miCodigoRespuesta.Content.ReadAsStringAsync();
+                        mihttpClient.Dispose();
                         listadoPersonas = JsonConvert.DeserializeObject<List<Persona>>(textoJsonRespuesta);
                     }
                 }
@@ -37,7 +39,6 @@ namespace APImaui
                 {
                     Console.WriteLine("No se pudo obtener el HTTP del servidor: " + ex.Message);
                 }
-            }
 
             return listadoPersonas;
         }
@@ -170,9 +171,9 @@ namespace APImaui
             Uri uri = new Uri($"{cadenaUrl}departamentos"); // Endpoint para departamentos
 
             List<Departamento> listadoDepartamentos = new List<Departamento>();
+            HttpClient mihttpClient = new HttpClient();
 
-            using (HttpClient mihttpClient = new HttpClient())
-            {
+
                 try
                 {
                     HttpResponseMessage miCodigoRespuesta = await mihttpClient.GetAsync(uri);
@@ -180,6 +181,7 @@ namespace APImaui
                     if (miCodigoRespuesta.IsSuccessStatusCode)
                     {
                         string textoJsonRespuesta = await miCodigoRespuesta.Content.ReadAsStringAsync();
+                        mihttpClient.Dispose();
                         listadoDepartamentos = JsonConvert.DeserializeObject<List<Departamento>>(textoJsonRespuesta);
                     }
                 }
@@ -187,7 +189,6 @@ namespace APImaui
                 {
                     Console.WriteLine("No se pudo obtener el HTTP del servidor: " + ex.Message);
                 }
-            }
 
             return listadoDepartamentos;
         }
