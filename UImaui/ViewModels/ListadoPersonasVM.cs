@@ -81,12 +81,33 @@ namespace UImaui.ViewModels
             try
             {
                 personas = ListadosBL.ListadoPersonasBL();
+
+
+                DetallesCommand = new Command(async () => await IrADetalles());
             }
             catch (Exception e)
             {
                 //todo error
             }
         }
+
+
+
+        /// <summary>
+        /// funcion que te lleva a los detalles
+        /// </summary>
+        /// <returns></returns>
+        private async Task IrADetalles()
+        {
+            if (PersonaSeleccionada != null)
+            {
+                await Shell.Current.GoToAsync($"MainPage.detallesPersona?personaId={PersonaSeleccionada.Id}");
+            }
+        }
+
+
+
+
 
 
 

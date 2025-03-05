@@ -5,7 +5,7 @@
              xmlns:miViewmodelA="clr-namespace:UImaui.ViewModels">
 
     <ContentPage.BindingContext>
-        <miViewmodelA:PersonaVM />
+        <miViewmodelA:EditarPersonaVM />
     </ContentPage.BindingContext>
 
     <ScrollView>

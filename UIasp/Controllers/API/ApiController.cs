@@ -15,7 +15,7 @@ namespace UIasp.Controllers.API
         [HttpGet]
         public IEnumerable<Persona> Get()
         {
-            List<Persona> list = BL.ListadosBL.ListadoPersonasBL();
+            List<Persona> list = ListadosBL.ListadoPersonasBL();
 
             //directamente te devuelve la funcion
             return list;

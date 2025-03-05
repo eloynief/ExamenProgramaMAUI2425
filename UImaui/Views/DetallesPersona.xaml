@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UImaui.Views.DetallesPersona"
+             xmlns:miViewModel="clr-namespace:UImaui.ViewModels"
+             Title="DetallesPersona">
+
+
+    <ContentPage.BindingContext>
+        <miViewModel:EditarPersonaVM></miViewModel:EditarPersonaVM>
+    </ContentPage.BindingContext>
+
+
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Frame BackgroundColor="#FAFAFA">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="{Binding PersonaSeleccionada.Foto}" 
+                   HeightRequest="60" 
+                   WidthRequest="60" 
+                   Aspect="AspectFill" />
+                
+                <VerticalStackLayout>
+                    <Label Text="{Binding PersonaSeleccionada.Nombre}" 
+                       FontAttributes="Bold" 
+                       FontSize="18" 
+                       TextColor="#333" />
+                    <Label Text="{Binding PersonaSeleccionada.Apellido}" 
+                       FontSize="14" 
+                       TextColor="#666" />
+                    <Label Text="{Binding PersonaSeleccionada.Direccion}" 
+                       FontSize="14" 
+                       TextColor="#999" />
+                    <Label Text="{Binding PersonaSeleccionada.FechaNac, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                       FontSize="14" 
+                       TextColor="#999" />
+                    <Label Text="{Binding PersonaSeleccionada.IdDepartamento}" 
+                       FontSize="14" 
+                       TextColor="#666" />
+                </VerticalStackLayout>
+                
+            </HorizontalStackLayout>
+        </Frame>
+        
+        
+        
+        
+        
+    </VerticalStackLayout>
+    
+    
+    
+    
+    
+    
+    
+    
+</ContentPage>

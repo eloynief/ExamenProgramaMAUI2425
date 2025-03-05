@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BL;
+using ENT;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,34 +11,70 @@ using System.Windows.Input;
 
 namespace UImaui.ViewModels
 {
+    [QueryProperty(nameof(personaId), "personaId")]
     class EditarPersonaVM : INotifyPropertyChanged
     {
 
-        PersonaConNombreDepartamento personaEditar;
+        PersonaConNombreDepartamento personaSeleccionada;
 
+        int personaId;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
-
-        public PersonaConNombreDepartamento PersonaEditar
+        //obtengo la persona
+        public PersonaConNombreDepartamento PersonaSeleccionada
         {
             get
             {
-                return personaEditar;
+                return personaSeleccionada;
             }
             set
             {
-                personaEditar = value;
+                personaSeleccionada = value;
                 NotifyPropertyChanged();
 
             }
         }
 
+
+
+        public int PersonaId
+        {
+            get
+            {
+                return personaId;
+            }
+            set {
+                personaId = value;
+                NotifyPropertyChanged();
+            }
+
+        }
+
+
+
+
+
         public ICommand SubmitCommand { private set; get; }
         public ICommand CancelCommand { private set; get; }
 
+        public EditarPersonaVM()
+        {
 
+            PersonaSeleccionada=new PersonaConNombreDepartamento(ListadosBL.ObtenerPersonaPorIdBL(personaId));
+
+
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.ContainsKey("personaId"))
+            {
+                int id = int.Parse(query["personaId"].ToString());
+                PersonaSeleccionada = new PersonaConNombreDepartamento(ListadosBL.ObtenerPersonaPorIdBL(id)); ;
+            }
+        }
 
 
         /// <summary>

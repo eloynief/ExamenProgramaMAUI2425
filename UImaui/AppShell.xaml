@@ -28,7 +28,10 @@
             Route="MainPage.departamentos" />
 
 
-
+    <ShellContent
+        Title="Detalles"
+        ContentTemplate="{DataTemplate local:DetallesPersona}"
+        Route="MainPage.detallesPersona" />
 
     <!--
     
