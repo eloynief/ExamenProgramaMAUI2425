@@ -1,5 +1,5 @@
 ﻿
-using BL;
+using APImaui;
 using ENT;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace UImaui.ViewModels
         //
         public List<Persona> Personas
         {
-            get { return ListadosBL.ListadoPersonasBL(); }
+            get { return AccionesMaui.ListadoPersonasMaui().Result; }
         }
 
         //cambiara la persona seleccionada y notificara el cambio
@@ -80,7 +80,7 @@ namespace UImaui.ViewModels
         {
             try
             {
-                personas = ListadosBL.ListadoPersonasBL();
+                personas = AccionesMaui.ListadoPersonasMaui().Result;
 
 
                 DetallesCommand = new Command(async () => await IrADetalles());

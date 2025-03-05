@@ -1,4 +1,5 @@
-﻿using BL;
+﻿
+using APImaui;
 using ENT;
 using System;
 using System.Collections.Generic;
@@ -61,10 +62,7 @@ namespace UImaui.ViewModels
 
         public EditarPersonaVM()
         {
-
-            PersonaSeleccionada=new PersonaConNombreDepartamento(ListadosBL.ObtenerPersonaPorIdBL(personaId));
-
-
+            PersonaSeleccionada=new PersonaConNombreDepartamento(AccionesMaui.PersonaPorIDMaui(PersonaId).Result);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -72,7 +70,7 @@ namespace UImaui.ViewModels
             if (query.ContainsKey("personaId"))
             {
                 int id = int.Parse(query["personaId"].ToString());
-                PersonaSeleccionada = new PersonaConNombreDepartamento(ListadosBL.ObtenerPersonaPorIdBL(id)); ;
+                PersonaSeleccionada = new PersonaConNombreDepartamento(AccionesMaui.PersonaPorIDMaui(PersonaId).Result); ;
             }
         }
 
