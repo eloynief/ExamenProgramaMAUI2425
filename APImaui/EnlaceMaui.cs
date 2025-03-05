@@ -8,6 +8,6 @@ namespace APImaui
 {
     internal class EnlaceMaui
     {
-        public static string enlace= "https://eloynervionasp.azurewebsites.net/api/";
+        public static string enlace= "https://crudnervion.azurewebsites.net/api/";
     }
 }
