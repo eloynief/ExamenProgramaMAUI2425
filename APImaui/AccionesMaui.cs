@@ -1,262 +1,143 @@
 ﻿using ENT;
 using Newtonsoft.Json;
 using System.Net;
-using UIasp.Controllers.API;
+using System.Net.Http;
 
 namespace APImaui
 {
-    //clase con las acciones de 
     public class AccionesMaui
     {
-
-
+        // HttpClient estático y reutilizable
+        private static readonly HttpClient _httpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(10) // Timeout para evitar esperas largas
+        };
 
         /// <summary>
-        /// 
+        /// Obtiene el listado de personas
         /// </summary>
-        /// <returns></returns>
         public static async Task<List<Persona>> ListadoPersonasMaui()
         {
-            string cadenaUrl = EnlaceMaui.enlace; // URL base de tu API
+            string cadenaUrl = EnlaceMaui.enlace;
             Uri uri = new Uri($"{cadenaUrl}personas");
+            List<Persona> listadoPersonas = new();
 
-            List<Persona> listadoPersonas = new List<Persona>();
-
-            using (HttpClient mihttpClient = new HttpClient())
+            try
             {
-                try
+                HttpResponseMessage response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage miCodigoRespuesta = await mihttpClient.GetAsync(uri);
-
-                    if (miCodigoRespuesta.IsSuccessStatusCode)
-                    {
-                        string textoJsonRespuesta = await miCodigoRespuesta.Content.ReadAsStringAsync();
-                        listadoPersonas = JsonConvert.DeserializeObject<List<Persona>>(textoJsonRespuesta);
-                    }
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    listadoPersonas = JsonConvert.DeserializeObject<List<Persona>>(jsonResponse) ?? new List<Persona>();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("No se pudo obtener el HTTP del servidor: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener personas: {ex.Message}");
             }
 
             return listadoPersonas;
         }
 
-
         /// <summary>
-        /// 
+        /// Inserta una persona en la API
         /// </summary>
-        /// <returns></returns>
-        public async Task<HttpStatusCode> insertaPersonaDAL(Persona persona)
+        public async Task<HttpStatusCode> InsertaPersonaDAL(Persona persona)
         {
-
-            HttpClient mihttpClient = new HttpClient();
-
-            string datos;
-
-            HttpContent contenido;
-
             string cadenaUrl = EnlaceMaui.enlace;
-
-            Uri uri = new Uri($"{cadenaUrl}Personas");
-
-            //Usaremos el Status de la respuesta para comprobar si ha borrado
-
-            HttpResponseMessage miRespuesta = new HttpResponseMessage();
+            Uri uri = new Uri($"{cadenaUrl}personas");
 
             try
-
             {
-
-                datos = JsonConvert.SerializeObject(persona);
-
-                contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
-
-                miRespuesta = await mihttpClient.PostAsync(uri, contenido);
-
+                string datos = JsonConvert.SerializeObject(persona);
+                using StringContent contenido = new(datos, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _httpClient.PostAsync(uri, contenido);
+                return response.StatusCode;
             }
-
             catch (Exception ex)
-
             {
-
-                throw ex;
-
+                Console.WriteLine($"Error al insertar persona: {ex.Message}");
+                throw;
             }
-
-            return miRespuesta.StatusCode;
         }
 
-
-
-
-
-
-
-
-
-
-
         /// <summary>
-        /// 
+        /// Obtiene una persona por ID
         /// </summary>
-        /// <returns></returns>
         public static async Task<Persona> PersonaPorIDMaui(int id)
         {
             string cadenaUrl = EnlaceMaui.enlace;
-
-            //enlace de la uri
             Uri uri = new Uri($"{cadenaUrl}personas/{id}");
-
-            List<Persona> listadoPersonas = new List<Persona>();
-            Persona persona = new Persona();
-
-            HttpClient mihttpClient;
-            HttpResponseMessage miCodigoRespuesta;
-            string textoJsonRespuesta;
-
-            //cliente Http
-            mihttpClient = new HttpClient();
+            Persona persona = null;
 
             try
             {
-                miCodigoRespuesta = await mihttpClient.GetAsync(uri);
-
-                //si obtiene correctamente el HTTP
-                if (miCodigoRespuesta.IsSuccessStatusCode)
+                HttpResponseMessage response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-
-                    textoJsonRespuesta = await mihttpClient.GetStringAsync(uri);
-
-                    mihttpClient.Dispose();
-
-                    //JsonConvert necesita using Newtonsoft.Json;
-
-                    //Es el paquete Nuget de Newtonsoft
-
-                    listadoPersonas = JsonConvert.DeserializeObject<List<Persona>>(textoJsonRespuesta);
-
-                    foreach(Persona p in listadoPersonas)
-                    {
-                        if (id == p.Id)
-                        {
-                            persona = p;
-                        }
-                    }
-
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    persona = JsonConvert.DeserializeObject<Persona>(jsonResponse);
                 }
-
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se pudo obtener el HTTP del servidor");
-                throw ex;
-
+                Console.WriteLine($"Error al obtener persona por ID: {ex.Message}");
             }
 
-            return persona;
+            return persona ?? new Persona();
         }
-
-
 
         /// <summary>
         /// Obtiene el listado completo de departamentos
         /// </summary>
-        /// <returns>Lista de departamentos</returns>
         public static async Task<List<Departamento>> ListadoDepartamentosMaui()
         {
-            string cadenaUrl = EnlaceMaui.enlace; // URL base de tu API
-            Uri uri = new Uri($"{cadenaUrl}departamentos"); // Endpoint para departamentos
+            string cadenaUrl = EnlaceMaui.enlace;
+            Uri uri = new Uri($"{cadenaUrl}departamentos");
+            List<Departamento> listadoDepartamentos = new();
 
-            List<Departamento> listadoDepartamentos = new List<Departamento>();
-
-            using (HttpClient mihttpClient = new HttpClient())
+            try
             {
-                try
+                HttpResponseMessage response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage miCodigoRespuesta = await mihttpClient.GetAsync(uri);
-
-                    if (miCodigoRespuesta.IsSuccessStatusCode)
-                    {
-                        string textoJsonRespuesta = await miCodigoRespuesta.Content.ReadAsStringAsync();
-                        listadoDepartamentos = JsonConvert.DeserializeObject<List<Departamento>>(textoJsonRespuesta);
-                    }
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    listadoDepartamentos = JsonConvert.DeserializeObject<List<Departamento>>(jsonResponse) ?? new List<Departamento>();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("No se pudo obtener el HTTP del servidor: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener departamentos: {ex.Message}");
             }
 
             return listadoDepartamentos;
         }
 
-
         /// <summary>
-        /// 
+        /// Obtiene el nombre de un departamento por ID
         /// </summary>
-        /// <returns></returns>
         public static async Task<string> NombreDepartamentoPorIDMaui(int id)
         {
             string cadenaUrl = EnlaceMaui.enlace;
-
-            //enlace de la uri
-            Uri uri = new Uri($"{cadenaUrl}departamentos");
-
-            List<Departamento> listadoPersonas = new List<Departamento>();
-            Departamento persona = new Departamento();
-
-            HttpClient mihttpClient;
-            HttpResponseMessage miCodigoRespuesta;
-            string textoJsonRespuesta;
-
-            //cliente Http
-            mihttpClient = new HttpClient();
+            Uri uri = new Uri($"{cadenaUrl}departamentos/{id}");
+            string nombre = string.Empty;
 
             try
             {
-                miCodigoRespuesta = await mihttpClient.GetAsync(uri);
-
-                //si obtiene correctamente el HTTP
-                if (miCodigoRespuesta.IsSuccessStatusCode)
+                HttpResponseMessage response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-
-                    textoJsonRespuesta = await mihttpClient.GetStringAsync(uri);
-
-                    mihttpClient.Dispose();
-
-                    //JsonConvert necesita using Newtonsoft.Json;
-
-                    //Es el paquete Nuget de Newtonsoft
-
-                    listadoPersonas = JsonConvert.DeserializeObject<List<Departamento>>(textoJsonRespuesta);
-
-                    foreach (Departamento p in listadoPersonas)
-                    {
-                        if (id == p.Id)
-                        {
-                            persona = p;
-                        }
-                    }
-
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    var departamento = JsonConvert.DeserializeObject<Departamento>(jsonResponse);
+                    nombre = departamento?.Nombre ?? string.Empty;
                 }
-
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se pudo obtener el HTTP del servidor");
-                throw ex;
-
+                Console.WriteLine($"Error al obtener nombre del departamento: {ex.Message}");
             }
 
-            return persona.Nombre;
+            return nombre;
         }
-
-
-
-
     }
 }
