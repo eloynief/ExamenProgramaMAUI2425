@@ -83,7 +83,7 @@ namespace UImaui.ViewModels
                 personas = AccionesMaui.ListadoPersonasMaui().Result;
 
 
-                DetallesCommand = new Command(async () => await IrADetalles());
+                DetallesCommand = new Command<Persona>(async (personaSeleccionada) => await IrADetalles());
             }
             catch (Exception e)
             {

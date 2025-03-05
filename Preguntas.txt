@@ -1,0 +1,11 @@
+
+Como se podian pasar datos de una pagina a otra (ej que muestre los detalles de la persona seleccionada al pasar a la pagina de editar o la de detalles)
+
+
+
+
+El eliminar datos es igual que el de asp? En nuestro caso me imagino que para borrar se hace una funcion para la de acciones maui, pero de donde hago la herencia?
+
+
+
+Tengo el problema de conexion al enlace y quiero arreglarlo para poder finalmente terminar mis cosas para terminar el proyecto
