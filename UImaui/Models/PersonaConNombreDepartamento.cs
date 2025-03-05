@@ -1,4 +1,5 @@
-﻿using BL;
+﻿
+using APImaui;
 using ENT;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -20,7 +21,7 @@ namespace UImaui.ViewModels
         /// </summary>
         public string NombreDepartamento
         {
-            get { return ListadosBL.ObtenerNombreDepartamentoBL(IdDepartamento); }
+            get { return AccionesMaui.NombreDepartamentoPorIDMaui(Id).Result; }
         }
 
         #endregion
@@ -30,7 +31,7 @@ namespace UImaui.ViewModels
         public PersonaConNombreDepartamento()
         {
             // Suponiendo que BL.ListadosBL.obtenerNombreDepartamentoBL es un método que retorna el nombre del departamento
-            nombreDepartamento = BL.ListadosBL.ObtenerNombreDepartamentoBL(IdDepartamento);
+            nombreDepartamento = AccionesMaui.NombreDepartamentoPorIDMaui(Id).Result;
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace UImaui.ViewModels
 
 
             // Suponiendo que BL.ListadosBL.obtenerNombreDepartamentoBL es un método que retorna el nombre del departamento
-            nombreDepartamento = BL.ListadosBL.ObtenerNombreDepartamentoBL(persona.IdDepartamento);
+            nombreDepartamento = AccionesMaui.NombreDepartamentoPorIDMaui(Id).Result;
 
 
         }

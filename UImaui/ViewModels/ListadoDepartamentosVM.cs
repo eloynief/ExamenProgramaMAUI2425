@@ -1,4 +1,5 @@
-﻿using BL;
+﻿
+using APImaui;
 using ENT;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace UImaui.ViewModels
 
         public List<Departamento> Departamentos
         {
-            get { return ListadosBL.ListadoDepartamentosBL(); }
+            get { return AccionesMaui.ListadoDepartamentosMaui().Result; }
         }
 
 

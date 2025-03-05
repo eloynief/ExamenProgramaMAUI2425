@@ -9,7 +9,7 @@ namespace UIasp.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiController : ControllerBase
+    public class PersonasController : ControllerBase
     {
         // GET: api/<ApiController>
         [HttpGet]
