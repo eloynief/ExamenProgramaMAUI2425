@@ -16,9 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APImaui", "APImaui\APImaui.csproj", "{2586323B-9A83-4FD1-9C54-AA5D514E0E2B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreguntasParaProfesor", "PreguntasParaProfesor", "{1DA2FFAA-8FD9-4D16-8787-FF77A2601FBA}"
-	ProjectSection(SolutionItems) = preProject
-		Preguntas.txt = Preguntas.txt
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApiMaui", "TestApiMaui\TestApiMaui.csproj", "{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +51,12 @@ Global
 		{2586323B-9A83-4FD1-9C54-AA5D514E0E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2586323B-9A83-4FD1-9C54-AA5D514E0E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2586323B-9A83-4FD1-9C54-AA5D514E0E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DDE7F87-19D9-44F4-94C0-9D0EDC0C81A9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

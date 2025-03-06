@@ -24,7 +24,7 @@
 
                     <Button 
                     Text="Detalles"
-                    IsEnabled="{Binding EsSeleccionada}"
+                    
                     Command="{Binding DetallesCommand}" 
                     />
 

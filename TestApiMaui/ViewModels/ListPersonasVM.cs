@@ -1,19 +1,14 @@
-﻿
-using APImaui;
-using ENT;
-using System;
-using System.Collections.Generic;
+﻿using ENT;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using TestApiMaui.Models.Services;
 
-namespace UImaui.ViewModels
+namespace TestApiMaui.ViewModels
 {
-    public class ListadoPersonasVM : INotifyPropertyChanged
+    internal class ListPersonasVM
     {
+
         //
         private List<Persona> personas;
 
@@ -32,11 +27,13 @@ namespace UImaui.ViewModels
         //cambiara la persona seleccionada y notificara el cambio
         public Persona PersonaSeleccionada
         {
-            get {
+            get
+            {
                 return personaSeleccionada;
             }
 
-            set {
+            set
+            {
                 if (personaSeleccionada != value)
                 {
                     personaSeleccionada = value;
@@ -76,28 +73,11 @@ namespace UImaui.ViewModels
 
 
         //
-        public ListadoPersonasVM()
+        public ListPersonasVM()
         {
             try
             {
                 rellenaListado();
-                
-                /**
-                string fotoPrueba= "https://pngmax.com/_next/image?url=https%3A%2F%2Fpng-max.s3.ap-south-1.amazonaws.com%2Flow%2F936505e8-677a-4a6a-af4e-e4a8c0f31dc9.png&w=1200&q=75";
-                personas= new List<Persona>
-                {
-                    new Persona(1,"nombreA","apellidoA",DateTime.Now,"dirA",fotoPrueba,"+34111111111",1),
-                    new Persona(2, "Pedro", "Martínez", DateTime.Now, "Avenida Luna 45", fotoPrueba, "+34222222222", 1),
-                    new Persona(3, "María", "López", DateTime.Now, "Plaza Estrella 7", fotoPrueba, "+34333333333", 1),
-                    new Persona(4, "Juan", "Rodríguez", DateTime.Now, "Calle Río 89", fotoPrueba, "+34444444444", 1),
-                    new Persona(5, "Sofía", "Pérez", DateTime.Now, "Paseo Bosque 12", fotoPrueba, "+34555555555", 1),
-                    new Persona(6, "Carlos", "Sánchez", DateTime.Now, "Avenida Mar 34", fotoPrueba, "+34666666666", 1),
-                    new Persona(7, "Lucía", "Gómez", DateTime.Now, "Calle Flor 56", fotoPrueba, "+34777777777", 1),
-                    new Persona(8, "Diego", "Fernández", DateTime.Now, "Plaza Mayor 78", fotoPrueba, "+34888888888", 1),
-                    new Persona(9, "Elena", "Díaz", DateTime.Now, "Camino Verde 90", fotoPrueba, "+34999999999", 1),
-                    new Persona(10, "Miguel", "Ruiz", DateTime.Now, "Calle Paz 11", fotoPrueba, "+34101010101", 1)
-                };
-                */
 
                 DetallesCommand = new Command<Persona>(async (personaSeleccionada) => await IrADetalles());
             }
@@ -109,8 +89,10 @@ namespace UImaui.ViewModels
 
         public async void rellenaListado()
         {
-            personas = await AccionesMaui.ListadoPersonasMaui();
+            personas= await Servicios.ListadoPersonasMaui();
         }
+
+
 
 
         /// <summary>
@@ -139,5 +121,6 @@ namespace UImaui.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

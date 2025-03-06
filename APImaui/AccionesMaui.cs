@@ -27,6 +27,7 @@ namespace APImaui
                 try
                 {
                     miCodigoRespuesta = await mihttpClient.GetAsync(uri);
+                    //miCodigoRespuesta = await mihttpClient.GetAsync("https://crudnervion.azurewebsites.net/api/personas");
 
                     if (miCodigoRespuesta.IsSuccessStatusCode)
                     {
@@ -42,6 +43,10 @@ namespace APImaui
 
             return listadoPersonas;
         }
+
+
+
+
 
 
         /// <summary>
